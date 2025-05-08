@@ -232,3 +232,28 @@
   z-index: 1000;
   border: 1px solid #333;
 }
+
+.clean-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.label-list {
+  display: grid;
+  width: 150px;
+  grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+  gap: 6px;
+}
+
+.label-list li {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.label-list li:hover, .label-list li.selected {
+  outline: 1px solid black;
+}
