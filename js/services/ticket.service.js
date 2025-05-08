@@ -1,8 +1,8 @@
 'use strict'
 
-const STORAGE_KEY = 'ticketDB'
+const TICKETS_KEY = 'ticketDB'
 
-var gTickets = loadFromStorage(STORAGE_KEY) || []
+var gTickets = loadFromStorage(TICKETS_KEY) || []
 
 function getTickets() {
     return gTickets
@@ -34,5 +34,5 @@ function resetTickets() {
 }
 
 function _saveTickets() {
-    saveToStorage(STORAGE_KEY, gTickets)
+    saveToStorage(TICKETS_KEY, gTickets)
 }
