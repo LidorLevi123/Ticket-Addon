@@ -15,7 +15,7 @@
     ],
     "web_accessible_resources": [
         {
-            "resources": ["img/excel.png", "img/paint-roller.png"],
+            "resources": ["img/excel.png"],
             "matches": ["<all_urls>"]
         }
     ],
@@ -48,8 +48,22 @@
                 "js/services/util.service.js",
                 "js/services/ticket.service.js",
                 "js/xlsx-min.js",
-                "js/excel-btn.js",
-                "js/paint-btn.js"
+                "js/excel-btn.js"
+            ],
+            "css": [
+                "css/style.css"
+            ],
+            "run_at": "document_end"
+        },
+        {
+            "matches": [
+                "https://pniot.ariel.ac.il/Projects/tzmm/Tickets_Application.asp*",
+                "https://pniot.ariel.ac.il/projects/tzmm/Tickets_Application.asp*"
+            ],
+            "js": [
+                "js/services/util.service.js",
+                "js/services/label.service.js",
+                "js/labels.js"
             ],
             "css": [
                 "css/style.css"
