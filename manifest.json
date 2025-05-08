@@ -1,0 +1,60 @@
+{
+    "manifest_version": 3,
+    "name": "Export tickets to excel",
+    "version": "1.0",
+    "description": "Add tickets one by one to a list and then export to excel file! Made by Lidor Levi",
+    "icons": {},
+    "action": {
+        "default_popup": "index.html"
+    },
+    "permissions": [
+        "storage"
+    ],
+    "host_permissions": [
+        "https://pniot.ariel.ac.il/Projects/tzmm/Add_Get_Tickets.asp*"
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": ["img/excel.png", "img/paint-roller.png"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://pniot.ariel.ac.il/Projects/tzmm/Add_Get_Tickets.asp*",
+                "https://pniot.ariel.ac.il/projects/tzmm/Add_Get_Tickets.asp*"
+            ],
+            "js": [
+                "js/services/util.service.js",
+                "js/services/ticket.service.js",
+                "js/xlsx-min.js",
+                "js/excel-btn.js",
+                "js/main.js"
+            ],
+            "css": [
+                "css/style.css"
+            ],
+            "run_at": "document_end"
+        },
+        {
+            "matches": [
+                "https://pniot.ariel.ac.il/Projects/tzmm/Tickets_Application.asp*",
+                "https://pniot.ariel.ac.il/projects/tzmm/Tickets_Application.asp*",
+                "https://pniot.ariel.ac.il/Projects/tzmm/Add_Get_Tickets.asp*",
+                "https://pniot.ariel.ac.il/projects/tzmm/Add_Get_Tickets.asp*"
+            ],
+            "js": [
+                "js/services/util.service.js",
+                "js/services/ticket.service.js",
+                "js/xlsx-min.js",
+                "js/excel-btn.js",
+                "js/paint-btn.js"
+            ],
+            "css": [
+                "css/style.css"
+            ],
+            "run_at": "document_end"
+        }
+    ]
+}

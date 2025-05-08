@@ -1,0 +1,234 @@
+.user-msg {
+  position: fixed;
+  right: 10px;
+  bottom: 13px;
+
+  width: max-content;
+  padding: 1rem;
+
+  border-radius: 1rem;
+  border: 1px solid black;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.33);
+  color: white;
+  background-color: #0029f8;
+
+  font-size: 1.1rem;
+  transition: bottom 0.5s;
+}
+
+.user-msg.error {
+  background-color: #fc3030;
+}
+
+.hide {
+  bottom: -10rem;
+}
+
+.excel-container {
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  transition: 0.3s;
+}
+
+.paint-container {
+  margin-block-start: 6px;
+  display: grid;
+  justify-items: end;
+  transition: 0.3s;
+}
+
+.excel-container img, .paint-container img {
+  width: 40px;
+  cursor: pointer;
+}
+
+.excel-container::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(255, 0, 0, 0);
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  top: 0;
+  right: 0;
+  transition: 0.2s;
+}
+
+.excel-container.ticket-added::before {
+  background-color: rgb(255, 0, 0);
+}
+
+.excel-container:hover, .paint-container:hover {
+  scale: 1.05;
+  opacity: 0.9;
+}
+
+.ticket-index {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+
+  transition: 0.5s;
+  pointer-events: none;
+  opacity: 0;
+  direction: rtl;
+
+  background-color: #cce0ff;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 2rem;
+  max-height: 500px;
+}
+
+.ticket-index.active {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.ticket-index .btn-close {
+  position: absolute;
+  border-radius: 50%;
+  top: -5px;
+  left: -5px;
+  cursor: pointer;
+}
+
+.ticket-index .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ticket-index button {
+  cursor: pointer;
+}
+
+.backdrop {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.backdrop.active {
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: auto;
+}
+
+.ticket-table {
+  border-collapse: collapse;
+  margin: auto;
+}
+
+.ticket-table td,
+.ticket-table tr {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  border: 1px solid black;
+  padding: 0.3rem;
+  max-width: 300px;
+}
+
+.btn-download {
+  --width: 100px;
+  --height: 35px;
+  --tooltip-height: 35px;
+  --tooltip-width: 90px;
+  --gap-between-tooltip-to-button: 18px;
+  --button-color: #1163ff;
+  --tooltip-color: #fff;
+  width: var(--width);
+  height: var(--height);
+  background: var(--button-color);
+  position: relative;
+  text-align: center;
+  border-radius: 0.45em;
+  font-family: "Arial";
+  transition: background 0.3s;
+  cursor: pointer;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-download-wrapper,
+.text,
+.icon {
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  color: #fff;
+}
+
+.text {
+  top: 0
+}
+
+.text,
+.icon {
+  transition: top 0.5s;
+}
+
+.icon {
+  color: #fff;
+  top: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.btn-download:hover {
+  background: #6c18ff;
+}
+
+.btn-download:hover .text {
+  top: -100%;
+}
+
+.btn-download:hover .icon {
+  top: 0;
+}
+
+.btn-download:hover:before,
+.btn-download:hover:after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.btn-download:hover:after {
+  bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) - 20px);
+}
+
+.btn-download:hover:before {
+  bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
+}
+
+.color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  display: none;
+  z-index: 1000;
+  border: 1px solid #333;
+}
