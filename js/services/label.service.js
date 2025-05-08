@@ -6,10 +6,12 @@ var gLabels
 
 _createLabels()
 
-console.log(gLabels)
-
 function getLabels() {
     return gLabels
+}
+
+function getLabelById(labelId) {
+    return gLabels.find(label => label.id === labelId)
 }
 
 function _createLabels() {
@@ -17,7 +19,6 @@ function _createLabels() {
     if(labels && labels.length) gLabels = labels
 
     gLabels = [
-        { id: 'l-100', color: '#808080', title: '' }, // gray
         { id: 'l-101', color: '#8B0000', title: '' }, // dark red
         { id: 'l-102', color: '#FF0000', title: '' }, // red
         { id: 'l-103', color: '#FF8C00', title: '' }, // orange
@@ -26,7 +27,6 @@ function _createLabels() {
         { id: 'l-106', color: '#00CED1', title: '' }, // turquoise/cyan
         { id: 'l-107', color: '#0000CD', title: '' }, // blue
         { id: 'l-108', color: '#800080', title: '' }, // purple
-        { id: 'l-109', color: '#D3D3D3', title: '' }, // light gray
         { id: 'l-110', color: '#A0522D', title: '' }, // brown
         { id: 'l-111', color: '#FFB6C1', title: '' }, // pink
         { id: 'l-112', color: '#FFE4B5', title: '' }, // peach/light orange
