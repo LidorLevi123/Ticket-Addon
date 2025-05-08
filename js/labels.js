@@ -11,11 +11,14 @@ renderColoredElements()
 
 function renderColoredElements() {
     if (!gColoredElements.length) return
-
+    console.log(gColoredElements);
+    
     gColoredElements.forEach(coloredEl => {
         const elColored = document.querySelector(`[title="${coloredEl.title}"]`)
-        elColored.style.backgroundColor = coloredEl.color
-        elColored.dataset.isColored = true
+        if(elColored) {
+            elColored.style.backgroundColor = coloredEl.color
+            elColored.dataset.isColored = true
+        }
     })
 }
 
@@ -48,10 +51,16 @@ function addEventListeners() {
         if (!gSelectedColor) return
         if (ev.target.style.backgroundColor === hexToRgb(gSelectedColor)) return
 
-        gColoredElements.push({
-            title: ev.target.title,
-            color: gSelectedColor,
-        })
+        const coloredEl = gColoredElements.find(coloredEl => coloredEl.title === ev.target.title)
+
+        if(coloredEl) {
+            coloredEl.color = gSelectedColor
+        } else {
+            gColoredElements.push({
+                title: ev.target.title,
+                color: gSelectedColor,
+            })
+        }
 
         ev.target.style.backgroundColor = gSelectedColor
         ev.target.dataset.isColored = true
