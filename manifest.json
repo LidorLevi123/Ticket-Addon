@@ -30,7 +30,8 @@
                 "js/services/ticket.service.js",
                 "js/xlsx-min.js",
                 "js/excel-btn.js",
-                "js/main.js"
+                "js/main.js",
+                "js/location-fetch.js"
             ],
             "css": [
                 "css/style.css"
@@ -63,7 +64,9 @@
             "js": [
                 "js/services/util.service.js",
                 "js/services/label.service.js",
-                "js/labels.js"
+                "js/labels.js",
+                "js/excel-btn.js",
+                "js/location-fetch.js"
             ],
             "css": [
                 "css/style.css"
