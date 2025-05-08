@@ -31,14 +31,7 @@
   transition: 0.3s;
 }
 
-.paint-container {
-  margin-block-start: 6px;
-  display: grid;
-  justify-items: end;
-  transition: 0.3s;
-}
-
-.excel-container img, .paint-container img {
+.excel-container img {
   width: 40px;
   cursor: pointer;
 }
@@ -59,7 +52,7 @@
   background-color: rgb(255, 0, 0);
 }
 
-.excel-container:hover, .paint-container:hover {
+.excel-container:hover {
   scale: 1.05;
   opacity: 0.9;
 }
@@ -241,16 +234,20 @@
 
 .label-list {
   display: grid;
-  width: 150px;
+  place-content: center;
+  place-items: center;
+  padding: 3px;
+  margin-block-start: 7px;
   grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
-  gap: 6px;
+  gap: 5px;
+  border: 1px solid #808080;
 }
 
 .label-list li {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: grab;
   transition: 0.3s;
 }
 
