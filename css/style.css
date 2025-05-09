@@ -25,7 +25,7 @@
 }
 
 .excel-container {
-  position: fixed;
+  position: absolute;
   top: 5px;
   right: 5px;
   transition: 0.3s;
