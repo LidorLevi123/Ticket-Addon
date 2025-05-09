@@ -8,7 +8,8 @@
         "default_popup": "index.html"
     },
     "permissions": [
-        "storage"
+        "storage",
+        "activeTab"
     ],
     "host_permissions": [
         "https://pniot.ariel.ac.il/Projects/tzmm/Add_Get_Tickets.asp*"
@@ -28,14 +29,14 @@
             "js": [
                 "js/services/util.service.js",
                 "js/services/ticket.service.js",
+                "js/services/location.service.js",
+                "js/services/fetch.service.js",
                 "js/xlsx-min.js",
                 "js/excel-btn.js",
                 "js/main.js",
                 "js/location-fetch.js"
             ],
-            "css": [
-                "css/style.css"
-            ],
+            "css": ["css/style.css"],
             "run_at": "document_end"
         },
         {
@@ -48,12 +49,12 @@
             "js": [
                 "js/services/util.service.js",
                 "js/services/ticket.service.js",
+                "js/services/location.service.js",
+                "js/services/fetch.service.js",
                 "js/xlsx-min.js",
                 "js/excel-btn.js"
             ],
-            "css": [
-                "css/style.css"
-            ],
+            "css": ["css/style.css"],
             "run_at": "document_end"
         },
         {
@@ -64,13 +65,13 @@
             "js": [
                 "js/services/util.service.js",
                 "js/services/label.service.js",
+                "js/services/location.service.js",
+                "js/services/fetch.service.js",
                 "js/labels.js",
                 "js/excel-btn.js",
                 "js/location-fetch.js"
             ],
-            "css": [
-                "css/style.css"
-            ],
+            "css": ["css/style.css"],
             "run_at": "document_end"
         }
     ]

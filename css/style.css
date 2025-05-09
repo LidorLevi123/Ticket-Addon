@@ -72,7 +72,7 @@
   border: 1px solid black;
   border-radius: 10px;
   padding: 2rem;
-  max-height: 500px;
+  min-width: 300px;
 }
 
 .ticket-index.active {
@@ -253,4 +253,11 @@
 
 .label-list li:hover, .label-list li.selected {
   outline: 1px solid black;
+}
+
+head-container {
+  padding: 1rem;
+  width: 200rem;
+  height: 300rem;
+  direction: rtl; /* for Hebrew layout */
 }

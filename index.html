@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-
+<html lang="he">
 <head>
+    <meta charset="UTF-8">
+    <title>Excel Ticket Viewer</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
-
-<html>
-
+<div class="head-container">
+    <h1>Excel Ticket Viewer</h1>
 <body>
     <!-- <div class="excel-container">
         <img class="excel-img" src="img/excel.png" alt="Excel img" title="הצג רשימת פניות לייצוא אקסל">
@@ -18,17 +19,18 @@
         <table class="ticket-table"><tbody class="ticket-list"></tbody></table>
     </div> -->
 
-    <ul class="label-list clean-list">
-        
-    </ul>
+    <ul class="label-list clean-list"></ul>
 
     <script src="js/services/util.service.js"></script>
     <script src="js/services/ticket.service.js"></script>
     <script src="js/services/label.service.js"></script>
+    <script src="js/services/fetch.service.js"></script>
+    <script src="js/services/location.service.js"></script>
+    <script src="js/location-fetch.js"></script>
     <script src="js/main.js"></script>
     <script src="js/excel-btn.js"></script>
     <script src="js/labels.js"></script>
     <script src="js/test-lidor.js"></script>
 </body>
-
+</div>
 </html>

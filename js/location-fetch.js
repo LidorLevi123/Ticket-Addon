@@ -1,41 +1,39 @@
-'use strict';
+console.log("location-fetch.js loaded");
+async function proccessTickets() {
+  let lobbyCount = document.querySelector("body > table > tbody > tr.tbody > td > form > table > tbody > tr:nth-child(4) > td > font > input[type=text]").value;
+  lobbyCount = lobbyCount.match(/\d+/); // Matches one or more digits
+  lobbyCount=  lobbyCount ? parseInt(lobbyCount[0], 10) : null;
+  console.log("lobbyCount", lobbyCount);
+  const ticketAnchors = document.querySelectorAll("a[href^='Add_Get_Tickets.asp?recid=']");
+  const photoSpans = document.querySelectorAll('span[onmouseover*="photo"]');
+  console.log("photoSpans", photoSpans.length);
+  for (let i = 0; i < ticketAnchors.length; i += 2) {
+    const anchor = ticketAnchors[i];
+    const presonAnchor = photoSpans[i/2];
+    const recid = anchor.href.match(/recid=(\d+)/)?.[1];
+    if (!recid) continue;
 
-const ticketTitles = document.querySelectorAll("a[href^='Add_Get_Tickets.asp?recid=']");
 
-for (let i = 0; i < ticketTitles.length; i += 2) {
-  const anchor = ticketTitles[i];
-  const recid = anchor.href.match(/recid=(\d+)/)?.[1];
-
-  if (!recid) continue;
-
-  // Fetch ticket page
-  fetch(`https://pniot.ariel.ac.il/projects/tzmm/Add_Get_Tickets.asp?recid=${recid}`, {
-    credentials: "include"
-  })
-    .then(res => res.arrayBuffer())
-    .then(buffer => {
-      const decoder = new TextDecoder("windows-1255");
-      const decodedHtml = decoder.decode(buffer);
-
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(decodedHtml, "text/html");
-
-      const xpath = "//td[b[contains(text(),'מקום התקלה:')]]";
-      const result = document.evaluate(xpath, doc, null, XPathResult.STRING_TYPE, null);
-      const location = result.stringValue.trim();
-
-      if (location.includes("מקום התקלה")) {
-
-        // 🔽 Create and insert the location element under the ticket
-        const td = anchor.closest("td"); // Get parent <td>
-        const locationElem = document.createElement("div");
-        locationElem.innerText = location.replace("מקום התקלה:", "").trim();
-        locationElem.style.color = "black";
-        locationElem.style.fontSize = "small";
-        locationElem.style.marginTop = "2px";
-
-        td.appendChild(locationElem);
+    try {
+      const url = `https://pniot.ariel.ac.il/projects/tzmm/Add_Get_Tickets.asp?recid=${recid}`;
+      const doc = await fetchAndParseHTML(url, "windows-1255");
+      const location = extractFaultLocation(doc);
+      let mobileNumber = extractMobileNumber(doc);
+      if (i/2<lobbyCount){
+        mobileNumber = extractMobileNumber(doc,1);
+        console.log("mobileNumber 1", mobileNumber);
+      }else{
+        mobileNumber = extractMobileNumber(doc,0);
       }
-    })
-    .catch(console.error);
+      const personPosition = extractPersonPosition(doc);
+      const personName = extractPersonName(doc);
+      const date = extractDate(doc);
+      if (location) appendLocationToAnchor(anchor, location);
+      if (mobileNumber) appendMobileToAnchor(presonAnchor, mobileNumber);
+    } catch (err) {
+      console.error(`Error fetching ticket ${recid}:`, err);
+    }
+  }
 }
+
+proccessTickets();
