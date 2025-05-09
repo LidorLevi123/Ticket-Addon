@@ -11,11 +11,10 @@ renderColoredElements()
 
 function renderColoredElements() {
     if (!gColoredElements.length) return
-    console.log(gColoredElements);
-    
+
     gColoredElements.forEach(coloredEl => {
         const elColored = document.querySelector(`[title="${coloredEl.title}"]`)
-        if(elColored) {
+        if (elColored) {
             elColored.style.backgroundColor = coloredEl.color
             elColored.dataset.isColored = true
         }
@@ -46,24 +45,30 @@ function addEventListeners() {
         colorDot.style.top = `${ev.clientY - 13}px`
     })
 
-    const elTicketList = document.querySelectorAll('table')[4]
+    const elTicketList = document.querySelector('form table')
     elTicketList.addEventListener('click', ev => {
         if (!gSelectedColor) return
+
+        let el = ev.target
+        if (!ev.target.title) {
+            // Handle case where user clicks on location div
+            el = ev.target.offsetParent
+        }
         if (ev.target.style.backgroundColor === hexToRgb(gSelectedColor)) return
 
-        const coloredEl = gColoredElements.find(coloredEl => coloredEl.title === ev.target.title)
+        const coloredEl = gColoredElements.find(coloredEl => coloredEl.title === el.title)
 
-        if(coloredEl) {
+        if (coloredEl) {
             coloredEl.color = gSelectedColor
         } else {
             gColoredElements.push({
-                title: ev.target.title,
+                title: el.title,
                 color: gSelectedColor,
             })
         }
 
-        ev.target.style.backgroundColor = gSelectedColor
-        ev.target.dataset.isColored = true
+        el.style.backgroundColor = gSelectedColor
+        el.dataset.isColored = true
 
         _saveColoredEls()
     })
@@ -71,10 +76,16 @@ function addEventListeners() {
     document.addEventListener('contextmenu', function (ev) {
         ev.preventDefault()
 
-        if(ev.target.dataset.isColored) {
-            ev.target.style.backgroundColor = DEFAULT_TICKET_COLOR
-            delete ev.target.dataset.isColored
-            gColoredElements = gColoredElements.filter(coloredEl => coloredEl.title !== ev.target.title)
+        let el = ev.target
+        if (!ev.target.title) {
+            // Handle case where user clicks on location div
+            el = ev.target.offsetParent
+        }
+
+        if (el.dataset.isColored) {
+            el.style.backgroundColor = DEFAULT_TICKET_COLOR
+            delete el.dataset.isColored
+            gColoredElements = gColoredElements.filter(coloredEl => coloredEl.title !== el.title)
             _saveColoredEls()
         } else {
             stopColorMode()
@@ -104,25 +115,6 @@ function onSetColor(color) {
     colorDot.style.display = 'block'
 }
 
-function hexToRgb(hex) {
-    // Remove "#" if it exists
-    hex = hex.replace(/^#/, '')
-
-    // Expand shorthand form (e.g. "03F") to full form ("0033FF")
-    if (hex.length === 3) {
-        hex = hex.split('').map(c => c + c).join('')
-    }
-
-    // Parse hex to RGB
-    const r = parseInt(hex.substring(0, 2), 16)
-    const g = parseInt(hex.substring(2, 4), 16)
-    const b = parseInt(hex.substring(4, 6), 16)
-
-    return `rgb(${r}, ${g}, ${b})`
-}
-
 function _saveColoredEls() {
     saveToStorage('colored-els', gColoredElements)
 }
-
-//   document.querySelectorAll('table')[4].querySelectorAll('tr')[15].querySelectorAll('td')[0].style.backgroundColor

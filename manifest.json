@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Export tickets to excel",
+    "name": "Ticket system expansion pack",
     "version": "1.0",
-    "description": "Add tickets one by one to a list and then export to excel file! Made by Lidor Levi",
+    "description": "A few extra features for your system, made by Lidor Levi and Daniel Zin",
     "icons": {},
     "action": {
         "default_popup": "index.html"
@@ -68,7 +68,6 @@
                 "js/services/location.service.js",
                 "js/services/fetch.service.js",
                 "js/labels.js",
-                "js/excel-btn.js",
                 "js/location-fetch.js"
             ],
             "css": ["css/style.css"],
