@@ -23,7 +23,7 @@ function renderColoredElements() {
 
 function renderLabels() {
     const labels = getLabels()
-    const strHTML = labels.map(label => `<li data-id=${label.id} style="background-color: ${label.color}"></li>`)
+    const strHTML = labels.map(label => `<li data-id=${label.id} title="${label.title}" style="background-color: ${label.color}"></li>`)
     const dotHTML = '<div class="color-dot"></div>'
 
     const elLabelList = document.createElement('ul')
@@ -31,20 +31,32 @@ function renderLabels() {
     elLabelList.innerHTML = strHTML.join('') + dotHTML
 
     // Under stars of today
-    document.querySelectorAll('table')[1].querySelector('td font').appendChild(elLabelList)
+    document.querySelector('.sh td > font').appendChild(elLabelList)
 }
 
 function addEventListeners() {
+    addPickListener()
+    addDotListener()
+    addColorListener()
+    addUndoListener()
+}
+
+function addPickListener() {
     document.querySelectorAll('.label-list li').forEach(elLabel => {
         elLabel.addEventListener('click', startColorMode)
     })
+}
+
+function addDotListener() {
     document.addEventListener('mousemove', ev => {
         const colorDot = document.querySelector('.color-dot')
 
         colorDot.style.left = `${ev.clientX - 10}px`
         colorDot.style.top = `${ev.clientY - 13}px`
     })
+}
 
+function addColorListener() {
     const elTicketList = document.querySelector('form table')
     elTicketList.addEventListener('click', ev => {
         if (!gSelectedColor) return
@@ -72,7 +84,9 @@ function addEventListeners() {
 
         _saveColoredEls()
     })
+}
 
+function addUndoListener() {
     document.addEventListener('contextmenu', function (ev) {
         ev.preventDefault()
 
