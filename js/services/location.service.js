@@ -184,11 +184,12 @@ function appendAccordionToTicketRow(anchor, location, mobileNumber, personPositi
 
   // Build the HTML for comments
   const commentHTML = ticketComments.map(comment => `
-    <div style="display: flex; margin-top: 10px; padding: 4px; border: 1px solid #ddd; background: #fff;justify-content:center;">
+    <div style="display: flex; margin-top: 10px; padding: 4px; border: 1px solid #ddd; background: #fff;alignt-items:center;justify-content:center;">
   <!-- Description first -->
-    <font style="font-size: small;font-weight:bold;">${comment.date}&nbsp;</font><br>
-  <font style="white-space: pre-wrap;flex-grow: 1;font-size:small;">${comment.description}</font>
 
+    <font style="font-size: small;font-weight:bold; padding-block-end:25px;">${comment.date}&nbsp;</font><br>
+    <div style="width:30px;"></div>
+  <font style="text-align:right;white-space: pre-wrap;flex-grow: 1;font-size:small;">${comment.description}</font>
   <!-- Date, Handler, and Status -->
   <div>
     <font style="font-size: small; font-weight:bold;">${comment.handler}</font> - 
