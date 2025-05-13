@@ -184,20 +184,26 @@ function appendAccordionToTicketRow(anchor, location, mobileNumber, personPositi
 
   // Build the HTML for comments
   const commentHTML = ticketComments.map(comment => `
-    <div style="margin-top: 10px; padding: 8px; border: 1px solid #ddd; background: #fff;">
-      <strong>${comment.date}</strong><br>
-      <span style="font-weight: bold;">${comment.handler}</span> - 
-      <span style="color: green;">${comment.status}</span><br>
-      <div style="white-space: pre-wrap;">${comment.description}</div>
-    </div>
+    <div style="display: flex; margin-top: 10px; padding: 4px; border: 1px solid #ddd; background: #fff;justify-content:center;">
+  <!-- Description first -->
+  <font style="white-space: pre-wrap; flex-grow: 1;justify-conent:center;font-size:small;">${comment.description}</font>
+  
+  <!-- Date, Handler, and Status -->
+  <div>
+    <font style="direction:rtl;font-size: small;font-weight:bold;">${comment.date}&nbsp;</font><br>
+    <font style="font-size: small; font-weight:bold;">${comment.handler}</font> - 
+    <font style="font-weight: bold; color: green;font-size: small;">${comment.status}</font>
+  </div>
+</div>
+
   `).join('');
 
   // Full accordion content
   accordionCell.innerHTML = `
-    <div id="accordion_${recid}" class="accordion-content" style="display: none; padding: 10px; background: #f5f5f5; border: 1px solid #ccc;">
-      <div style="margin-top: 15px;">
-        <strong>Comments:</strong>
-        <div style="margin-top: 5px;">
+    <div id="accordion_${recid}" class="accordion-content" style="display: none;padding: 6px; background: #f5f5f5; border: 1px solid #ccc;justify-content:center;">
+      <div style="margin-top: 15px;display: flex;justify-content:center;flex-direction: column;">
+        <strong>הערות בפנייה:</strong>
+        <div style="margin-top: 5px;display:flex;flex-direction:column;justify-content:center;">
           ${commentHTML || '<em>No comments found.</em>'}
         </div>
       </div>
@@ -212,6 +218,6 @@ function appendAccordionToTicketRow(anchor, location, mobileNumber, personPositi
   anchor.addEventListener('click', (e) => {
     e.preventDefault();
     const content = accordionCell.querySelector('.accordion-content');
-    content.style.display = content.style.display === 'none' ? 'block' : 'none';
+    content.style.display = content.style.display === 'none' ? 'flex' : 'none';
   });
 }
