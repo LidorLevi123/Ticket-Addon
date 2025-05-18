@@ -233,6 +233,9 @@
 }
 
 .label-list {
+  position: sticky;
+  top: 3px;
+
   display: grid;
   place-content: center;
   place-items: center;
