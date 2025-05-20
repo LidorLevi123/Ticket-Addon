@@ -6,67 +6,67 @@
  * @returns {string|null}
  */
 function extractFaultLocation(doc) {
-    const xpath = "//td[b[contains(text(),'מקום התקלה:')]]";
-    const result = document.evaluate(
-        xpath,
-        doc,
-        null,
-        XPathResult.STRING_TYPE,
-        null
-    );
-    const location = result.stringValue.trim();
-    return location.includes("מקום התקלה")
-        ? location.replace("מקום התקלה:", "").trim()
-        : null;
+  const xpath = "//td[b[contains(text(),'מקום התקלה:')]]";
+  const result = document.evaluate(
+    xpath,
+    doc,
+    null,
+    XPathResult.STRING_TYPE,
+    null
+  );
+  const location = result.stringValue.trim();
+  return location.includes("מקום התקלה")
+    ? location.replace("מקום התקלה:", "").trim()
+    : null;
 }
 ///html/body/table[2]/tbody/tr[4]/td/table/tbody/tr/td[2]/font[2]/b
-function extractMobileNumber(doc,bool) {
-  let xpath =''
-  if (bool){
+function extractMobileNumber(doc, bool) {
+  let xpath = ''
+  if (bool) {
     xpath = '//html/body'; // Specific XPath for index 13
-  }else{
+  } else {
     xpath = `(//table)[${13}]//tbody/tr/td[3]/font`;
   }
-   
-    const result = document.evaluate(
-        xpath,
-        doc,
-        null,
-        XPathResult.STRING_TYPE,
-        null
-    );
-    if (bool){
-      return result.stringValue.trim().match(/05\d{8}/g)[0];
-    }
-    else{
-      const mobileNumber = result.stringValue.trim();
-      return mobileNumber.trim();
-    }
+
+  const result = document.evaluate(
+    xpath,
+    doc,
+    null,
+    XPathResult.STRING_TYPE,
+    null
+  );
+  if (bool) {
+    return result.stringValue.trim().match(/05\d{8}/g)[0];
+  }
+  else {
+    const mobileNumber = result.stringValue.trim();
+    return mobileNumber.trim();
+  }
 }
 
 function extractPersonPosition(doc) {
-    const xpath = "(//table)[13]//tbody/tr/td[1]/font";
-    const result = document.evaluate(
-        xpath,
-        doc,
-        null,
-        XPathResult.STRING_TYPE,
-        null
-    );
+  const xpath = "(//table)[13]//tbody/tr/td[1]/font";
+  const result = document.evaluate(
+    xpath,
+    doc,
+    null,
+    XPathResult.STRING_TYPE,
+    null
+  );
 
-    const positionText = result.stringValue.trim();
+  const positionText = result.stringValue.trim();
 
-    return positionText.trim();
+  return positionText.trim();
 }
 
 function extractPersonName(doc) {
   const xpath = "(//table)[13]//tbody/tr/td[2]/font";
   const result = document.evaluate(
-      xpath,
-      doc,
-      null,
-      XPathResult.STRING_TYPE,
-      null
+    xpath,
+    doc,
+    null,
+    XPathResult.STRING_TYPE,
+    null
   );
 
   let personName = result.stringValue.trim();
@@ -86,11 +86,11 @@ function extractPersonName(doc) {
 function extractDate(doc) {
   const xpath = "(//table)[13]//tbody/tr/td[5]/font";
   const result = document.evaluate(
-      xpath,
-      doc,
-      null,
-      XPathResult.STRING_TYPE,
-      null
+    xpath,
+    doc,
+    null,
+    XPathResult.STRING_TYPE,
+    null
   );
   const date = result.stringValue.trim();
   return date.trim();
@@ -118,6 +118,13 @@ function extractComments(doc) {
   return tableNode;
 }
 
+function extractDescription(doc) {
+  const descriptionElement = doc.querySelector("#t_areaDescription");
+  const descriptionText = descriptionElement?.value || "";
+
+  console.log("Ticket Description:", descriptionText);
+  return descriptionText;
+}
 
 /**
  * Appends a location message under the relevant anchor's parent <td>.
@@ -125,16 +132,16 @@ function extractComments(doc) {
  * @param {string} location
  */
 function appendLocationToAnchor(anchor, location) {
-    const td = anchor.closest("td");
-    if (!td) return;
+  const td = anchor.closest("td");
+  if (!td) return;
 
-    const locationElem = document.createElement("div");
-    locationElem.innerText = location;
-    locationElem.style.color = "black";
-    locationElem.style.fontSize = "small";
-    locationElem.style.marginTop = "2px";
+  const locationElem = document.createElement("div");
+  locationElem.innerText = location;
+  locationElem.style.color = "black";
+  locationElem.style.fontSize = "small";
+  locationElem.style.marginTop = "2px";
 
-    td.appendChild(locationElem);
+  td.appendChild(locationElem);
 }
 
 function appendMobileToAnchor(anchor, mobileNumber) {
@@ -150,7 +157,7 @@ function appendMobileToAnchor(anchor, mobileNumber) {
   td.appendChild(mobileElem);
 }
 
-function parseCommentsTable(tableElement,recid) {
+function parseCommentsTable(tableElement, recid) {
   const rows = tableElement.querySelectorAll("tbody tr");
   const data = [];
 
@@ -164,7 +171,7 @@ function parseCommentsTable(tableElement,recid) {
     const status = cells[3]?.innerText.trim();
     const title = recid
 
-    data.push({ title,date, description, handler, status });
+    data.push({ title, date, description, handler, status });
   }
 
   return data;
@@ -222,3 +229,52 @@ function appendAccordionToTicketRow(anchor, location, mobileNumber, personPositi
     content.style.display = content.style.display === 'none' ? 'flex' : 'none';
   });
 }
+
+function addShareButtons(anchor, recid, personName, mobileNumber, location, description) {
+  const td = anchor.closest("td");
+  if (!td) return;
+
+  if (!location) location = 'לא צויין';
+
+  // Use Unicode escapes for emojis so no risk of encoding issues
+  const textToShare =
+    "פנייה מספר: " + recid + "\n" +      // 🔢
+    "מיקום: " + location + "\n" +        // 📍
+    "תיאור: " + description + "\n" +     // 📝
+    "לקוח: " + personName + "\n" +       // 👤
+    "נייד: " + mobileNumber;              // 📱
+
+  const whatsappLink = `https://wa.me/?text=${encodeURIComponent(textToShare)}`;
+
+  // Copy to clipboard button
+  const copyBtn = document.createElement("button");
+  copyBtn.innerText = "📋";
+  copyBtn.title = "העתק ללוח";
+  copyBtn.style.cssText = "margin-left:5px; cursor:pointer; font-size:12px;";
+  copyBtn.onclick = () => {
+    navigator.clipboard.writeText(textToShare).then(() => {
+    }).catch(() => {
+      alert("שגיאה בהעתקה ללוח");
+    });
+  };
+
+  // WhatsApp share button with image
+  const waBtn = document.createElement("a");
+  waBtn.href = whatsappLink;
+  waBtn.target = "_blank";
+  waBtn.rel = "noopener noreferrer";
+  waBtn.title = "שתף בוואטסאפ";
+  waBtn.style.cssText = "margin-left:5px; font-size:12px; text-decoration:none; display:inline-block; vertical-align:middle;";
+
+  const waIcon = document.createElement("img");
+  waIcon.src = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"; // You can use a local path instead
+  waIcon.alt = "WhatsApp";
+  waIcon.style.cssText = "width:16px; height:16px; vertical-align:middle;";
+
+  waBtn.appendChild(waIcon);
+
+  // Append buttons to the <td>
+  td.appendChild(copyBtn);
+  td.appendChild(waBtn);
+}
+

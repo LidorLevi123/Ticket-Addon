@@ -6,12 +6,14 @@ async function proccessTickets() {
 
   const ticketAnchors = Array.from(document.querySelectorAll("a[href^='Add_Get_Tickets.asp?recid=']"));
   const photoSpans = Array.from(document.querySelectorAll('span[onmouseover*="photo"]'));
+  const whatsappAnchors = Array.from(document.querySelectorAll('input[type="text"][value^="עדיפות:"]'))
 
   console.log("photoSpans", photoSpans.length);
 
   // Only process every second anchor
   const tasks = ticketAnchors.filter((_, i) => i % 2 === 0).map((anchor, idx) => {
     const presonAnchor = photoSpans[idx];
+    const whAnchor = whatsappAnchors[idx];
     const recid = anchor.href.match(/recid=(\d+)/)?.[1];
     if (!recid) return Promise.resolve();
 
@@ -31,6 +33,7 @@ async function proccessTickets() {
         const personPosition = extractPersonPosition(doc);
         const personName = extractPersonName(doc);
         const date = extractDate(doc);
+        const description = extractDescription(doc);
 
         const tableComments = extractComments(doc);
         const comments = tableComments ? parseCommentsTable(tableComments, recid) : [];
@@ -38,13 +41,15 @@ async function proccessTickets() {
         return {
           anchor,
           presonAnchor,
+          whAnchor,
           recid,
           location,
           mobileNumber,
           personPosition,
           personName,
           date,
-          comments
+          comments,
+          description
         };
       } catch (err) {
         console.error(`Error fetching ticket ${recid}:`, err);
@@ -58,8 +63,8 @@ async function proccessTickets() {
   for (const result of results) {
     if (!result) continue;
     const {
-      anchor, presonAnchor, location, mobileNumber,
-      personPosition, personName, date, recid, comments
+      anchor, presonAnchor,whAnchor, location, mobileNumber,
+      personPosition, personName, date, recid, comments,description
     } = result;
 
     if (location) appendLocationToAnchor(anchor, location);
@@ -73,9 +78,10 @@ async function proccessTickets() {
         personName,
         date,
         recid,
-        comments
+        comments,
       );
     }
+    addShareButtons(whAnchor, recid, personName, mobileNumber, location, description);
   }
 }
 
