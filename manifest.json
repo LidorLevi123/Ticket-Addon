@@ -9,10 +9,12 @@
     },
     "permissions": [
         "storage",
-        "activeTab"
+        "activeTab",
+        "https://translation.googleapis.com/"
     ],
     "host_permissions": [
-        "https://pniot.ariel.ac.il/Projects/tzmm/Add_Get_Tickets.asp*"
+        "https://pniot.ariel.ac.il/Projects/tzmm/Add_Get_Tickets.asp*",
+        "https://translation.googleapis.com/"
     ],
     "web_accessible_resources": [
         {
@@ -31,10 +33,12 @@
                 "js/services/ticket.service.js",
                 "js/services/location.service.js",
                 "js/services/fetch.service.js",
+                "js/services/translate.service.js",
                 "js/xlsx-min.js",
                 "js/excel-btn.js",
                 "js/main.js",
-                "js/location-fetch.js"
+                "js/location-fetch.js",
+                "js/translate.js"
             ],
             "css": ["css/style.css"],
             "run_at": "document_end"
