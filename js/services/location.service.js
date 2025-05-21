@@ -19,28 +19,26 @@ function extractFaultLocation(doc) {
     ? location.replace("מקום התקלה:", "").trim()
     : null;
 }
-///html/body/table[2]/tbody/tr[4]/td/table/tbody/tr/td[2]/font[2]/b
-function extractMobileNumber(doc, bool) {
-  let xpath = ''
-  if (bool) {
-    xpath = '//html/body'; // Specific XPath for index 13
-  } else {
-    xpath = `(//table)[${13}]//tbody/tr/td[3]/font`;
-  }
 
-  const result = document.evaluate(
-    xpath,
-    doc,
-    null,
-    XPathResult.STRING_TYPE,
-    null
-  );
-  if (bool) {
-    return result.stringValue.trim().match(/05\d{8}/g)[0];
-  }
-  else {
-    const mobileNumber = result.stringValue.trim();
-    return mobileNumber.trim();
+function extractMobileNumber(doc) {
+  // 1. Find the image element with the onclick="popupsms(...)" attribute
+  const smsImage = doc.querySelector('img[onclick^="popupsms("]');
+
+  if (smsImage) {
+    // 2. Get the parent <td> element
+    const td = smsImage.closest('td');
+
+    if (td) {
+      // 3. Find the <font> element inside the <td>
+      const fontElement = td.querySelector('font');
+
+      if (fontElement) {
+        // 4. Get the phone number text
+        const phoneNumber = fontElement.textContent.trim();
+        console.log("Phone number above image:", phoneNumber);
+        return phoneNumber
+      }
+    }
   }
 }
 
@@ -59,7 +57,7 @@ function extractPersonPosition(doc) {
   return positionText.trim();
 }
 
-function extractPersonName(doc) {
+function extractPersonName(doc, bool) {
   const xpath = "(//table)[13]//tbody/tr/td[2]/font";
   const result = document.evaluate(
     xpath,
@@ -79,6 +77,8 @@ function extractPersonName(doc) {
 
   // Trim again to clean up spaces
   personName = personName.trim();
+
+  console.log("person name", personName)
 
   return personName;
 }
@@ -235,6 +235,8 @@ function addShareButtons(anchor, recid, personName, mobileNumber, location, desc
   if (!td) return;
 
   if (!location) location = 'לא צויין';
+
+  console.log("PERSON NAME", personName)
 
   // Use Unicode escapes for emojis so no risk of encoding issues
   const textToShare =
