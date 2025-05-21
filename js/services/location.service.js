@@ -35,7 +35,6 @@ function extractMobileNumber(doc) {
       if (fontElement) {
         // 4. Get the phone number text
         const phoneNumber = fontElement.textContent.trim();
-        console.log("Phone number above image:", phoneNumber);
         return phoneNumber
       }
     }
@@ -78,8 +77,6 @@ function extractPersonName(doc, bool) {
   // Trim again to clean up spaces
   personName = personName.trim();
 
-  console.log("person name", personName)
-
   return personName;
 }
 
@@ -109,7 +106,6 @@ function extractComments(doc) {
   const tableNode = result.singleNodeValue;
 
   if (!tableNode) {
-    console.warn("No table found at that XPath.");
     return null;
   }
 
@@ -122,7 +118,6 @@ function extractDescription(doc) {
   const descriptionElement = doc.querySelector("#t_areaDescription");
   const descriptionText = descriptionElement?.value || "";
 
-  console.log("Ticket Description:", descriptionText);
   return descriptionText;
 }
 
@@ -235,8 +230,6 @@ function addShareButtons(anchor, recid, personName, mobileNumber, location, desc
   if (!td) return;
 
   if (!location) location = 'לא צויין';
-
-  console.log("PERSON NAME", personName)
 
   // Use Unicode escapes for emojis so no risk of encoding issues
   const textToShare =

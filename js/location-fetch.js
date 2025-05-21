@@ -45,7 +45,6 @@ async function proccessTickets() {
         const location = extractFaultLocation(doc);
         const mobileNumber = extractMobileNumber(doc)
         const personPosition = extractPersonPosition(doc);
-        //const personName = idx < lobbyCount ? extractPersonName(doc, 1) : extractPersonName(doc, 0);
         const personName = photoSpans[idx].textContent.trim()
         const date = extractDate(doc);
         const description = extractDescription(doc);
