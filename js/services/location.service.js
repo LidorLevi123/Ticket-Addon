@@ -244,6 +244,7 @@ function addShareButtons(anchor, recid, personName, mobileNumber, location, desc
   // Copy to clipboard button
   const copyBtn = document.createElement("button");
   copyBtn.innerText = "📋";
+  copyBtn.type = 'button'
   copyBtn.title = "העתק ללוח";
   copyBtn.style.cssText = "margin-left:5px; cursor:pointer; font-size:12px;";
   copyBtn.onclick = () => {
