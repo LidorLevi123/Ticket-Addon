@@ -2,17 +2,13 @@
     "manifest_version": 3,
     "name": "Ticket system expansion pack",
     "version": "1.0",
-    "description": "A few extra features for your system, made by Lidor Levi and Daniel Zin",
+    "description": "A few extra features for your system, made by Lidor Levi and Daniel Zin. Only works in a specific domain",
     "icons": {},
     "action": {
         "default_popup": "index.html"
     },
     "permissions": [
         "storage"
-    ],
-    "host_permissions": [
-        "https://pniot.ariel.ac.il/Projects/tzmm/Add_Get_Tickets.asp*",
-        "https://translation.googleapis.com/"
     ],
     "web_accessible_resources": [
         {
