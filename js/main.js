@@ -12,30 +12,28 @@ function onInit() {
 
 function renderBtn(txt) {
     const elMetapel = document.querySelector('font[alt="OWNER_METAPEL"]')
-    if(!elMetapel) return
+    if (!elMetapel) return
 
-    const strHTML = `
-        <input 
-            type="button" 
-            class="ticetsButton btn-add-ticket" 
-            value="${txt}"
-            name="cmbEnter" 
-            tabindex="1">
+    const input = document.createElement('input')
+    input.type = 'button'
+    input.className = 'ticetsButton btn-add-ticket'
+    input.value = txt
+    input.tabIndex = 1
 
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									
-									
+    const spacer = document.createTextNode("\u00A0\u00A0\u00A0\u00A0\u00A0")
 
-									
-													
-            `
+    const container = document.createElement("div")
+    container.appendChild(input)
+    container.appendChild(spacer)
+    container.style.display = 'inline-block'
+
     const elBtnContainer = document.querySelector('tbody tr:nth-of-type(17) td')
-    elBtnContainer.innerHTML = strHTML + elBtnContainer.innerHTML
+    elBtnContainer.insertBefore(container, elBtnContainer.firstChild)
 }
 
 function renderUserMsg() {
     const elUserMsg = document.createElement('div')
-    elUserMsg.classList.add('user-msg', 'hide') 
+    elUserMsg.classList.add('user-msg', 'hide')
     document.body.appendChild(elUserMsg)
 }
 
@@ -74,7 +72,7 @@ function showUserMsg(msg, className = '') {
     const elMsg = document.querySelector('.user-msg')
     elMsg.classList.remove('hide')
     elMsg.classList.remove('error')
-    if(className) elMsg.classList.add(className)
+    if (className) elMsg.classList.add(className)
     elMsg.innerText = msg
 
     gMsgTimeout = setTimeout(() => {
