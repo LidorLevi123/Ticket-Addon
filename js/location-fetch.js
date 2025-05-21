@@ -95,4 +95,6 @@ async function proccessTickets() {
   }
 }
 
-proccessTickets();
+if (window.location.href.toLowerCase() === "https://pniot.ariel.ac.il/projects/tzmm/tickets_application.asp") {
+  proccessTickets();
+}
