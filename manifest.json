@@ -8,9 +8,7 @@
         "default_popup": "index.html"
     },
     "permissions": [
-        "storage",
-        "activeTab",
-        "https://translation.googleapis.com/"
+        "storage"
     ],
     "host_permissions": [
         "https://pniot.ariel.ac.il/Projects/tzmm/Add_Get_Tickets.asp*",
@@ -34,7 +32,7 @@
                 "js/services/location.service.js",
                 "js/services/fetch.service.js",
                 "js/services/translate.service.js",
-                "js/xlsx-min.js",
+                "js/lib/xlsx-min.js",
                 "js/excel-btn.js",
                 "js/main.js",
                 "js/location-fetch.js",
@@ -55,7 +53,7 @@
                 "js/services/ticket.service.js",
                 "js/services/location.service.js",
                 "js/services/fetch.service.js",
-                "js/xlsx-min.js",
+                "js/lib/xlsx-min.js",
                 "js/excel-btn.js"
             ],
             "css": ["css/style.css"],
