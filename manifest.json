@@ -24,14 +24,8 @@
             ],
             "js": [
                 "js/services/util.service.js",
-                "js/services/ticket.service.js",
-                "js/services/location.service.js",
-                "js/services/fetch.service.js",
                 "js/services/translate.service.js",
-                "js/lib/xlsx-min.js",
-                "js/excel-btn.js",
                 "js/main.js",
-                "js/location-fetch.js",
                 "js/translate.js"
             ],
             "css": ["css/style.css"],
@@ -51,7 +45,8 @@
                 "js/services/location.service.js",
                 "js/services/fetch.service.js",
                 "js/lib/xlsx-min.js",
-                "js/excel-btn.js"
+                "js/excel-btn.js",
+                "js/location-fetch.js"
             ],
             "css": ["css/style.css"],
             "run_at": "document_end"
@@ -67,7 +62,8 @@
                 "js/services/location.service.js",
                 "js/services/fetch.service.js",
                 "js/labels.js",
-                "js/location-fetch.js"
+                "js/location-fetch.js",
+                "js/elements-class.js"
             ],
             "css": ["css/style.css"],
             "run_at": "document_end"

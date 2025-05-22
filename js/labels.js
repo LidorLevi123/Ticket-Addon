@@ -66,6 +66,7 @@ function addColorListener() {
             // Handle case where user clicks on location div
             el = ev.target.offsetParent
         }
+        if (!el.title.startsWith('21')) return
         if (ev.target.style.backgroundColor === hexToRgb(gSelectedColor)) return
 
         const coloredEl = gColoredElements.find(coloredEl => coloredEl.title === el.title)
@@ -98,6 +99,7 @@ function addUndoListener() {
 
         if (el.dataset.isColored) {
             el.style.backgroundColor = DEFAULT_TICKET_COLOR
+            el.style.boxShadow = `inset 0px 0px 6px 2px ${gSelectedColor}`
             delete el.dataset.isColored
             gColoredElements = gColoredElements.filter(coloredEl => coloredEl.title !== el.title)
             _saveColoredEls()
@@ -111,6 +113,12 @@ function startColorMode(ev) {
     const label = getLabelById(ev.target.dataset.id)
     onSetColor(label.color)
     document.body.style.cursor = 'grabbing'
+
+    document.querySelectorAll('.ticket-id-container').forEach(td => {
+        if(!td.dataset.isColored) {
+            td.style.boxShadow = `inset 0px 0px 6px 2px ${label.color}`
+        }
+    })
 }
 
 function stopColorMode() {
@@ -119,6 +127,8 @@ function stopColorMode() {
     colorDot.style.display = 'none';
     gSelectedColor = ''
     document.body.style.cursor = 'default'
+
+    document.querySelectorAll('.ticket-id-container').forEach(td => td.style.boxShadow = 'none')
 }
 
 function onSetColor(color) {

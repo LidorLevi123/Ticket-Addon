@@ -24,6 +24,10 @@
   bottom: -10rem;
 }
 
+.ticket-id-container {
+  transition: 0.3s box-shadow;
+}
+
 .excel-container {
   position: absolute;
   top: 5px;
