@@ -248,9 +248,12 @@ function addShareButtons(anchor, recid, personName, mobileNumber, location, desc
   copyBtn.title = "העתק ללוח";
   copyBtn.style.cssText = "margin-left:5px; cursor:pointer; font-size:12px;";
   copyBtn.onclick = () => {
-    navigator.clipboard.writeText(textToShare).then(() => {
-    }).catch(() => {
-      alert("שגיאה בהעתקה ללוח");
+    navigator.clipboard.writeText(textToShare)
+    .then(() => {
+      showUserMsg(`פניה ${recid} הועתקה ללוח`)
+    })
+    .catch(() => {
+      showErrorMsg('לא ניתן להעתיק ללוח')
     });
   };
 
@@ -273,4 +276,3 @@ function addShareButtons(anchor, recid, personName, mobileNumber, location, desc
   td.appendChild(copyBtn);
   td.appendChild(waBtn);
 }
-

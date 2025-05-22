@@ -45,6 +45,7 @@
                 "https://pniot.ariel.ac.il/projects/tzmm/Add_Get_Tickets.asp*"
             ],
             "js": [
+                "js/user-msg.js",
                 "js/services/util.service.js",
                 "js/services/ticket.service.js",
                 "js/services/location.service.js",
