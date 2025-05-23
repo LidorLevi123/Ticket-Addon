@@ -4,16 +4,13 @@
     "version": "1.0",
     "description": "A few extra features for your system, made by Lidor Levi and Daniel Zin. Only works in a specific domain",
     "icons": {},
-    "action": {
-        "default_popup": "index.html"
-    },
     "permissions": [
         "storage"
     ],
     "web_accessible_resources": [
         {
             "resources": ["img/excel.png"],
-            "matches": ["<all_urls>"]
+            "matches": ["https://pniot.ariel.ac.il/*"]
         }
     ],
     "content_scripts": [
@@ -57,13 +54,13 @@
                 "https://pniot.ariel.ac.il/projects/tzmm/Tickets_Application.asp*"
             ],
             "js": [
+                "js/elements-class.js",
                 "js/services/util.service.js",
                 "js/services/label.service.js",
                 "js/services/location.service.js",
                 "js/services/fetch.service.js",
                 "js/labels.js",
-                "js/location-fetch.js",
-                "js/elements-class.js"
+                "js/location-fetch.js"
             ],
             "css": ["css/style.css"],
             "run_at": "document_end"

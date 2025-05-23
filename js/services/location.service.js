@@ -242,8 +242,8 @@ function addShareButtons(anchor, recid, personName, mobileNumber, location, desc
   const whatsappLink = `https://wa.me/?text=${encodeURIComponent(textToShare)}`;
 
   // Copy to clipboard button
-  const copyBtn = document.createElement("span");
-  copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="-1 0 20 20">
+  const copyBtn = document.createElement("div");
+  copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="-1 0 20 20">
   <g id="copy-4" transform="translate(-3 -2)">
     <path id="secondary" fill="#2ca9bc" d="M19,3H16V4a1,1,0,0,1-1,1H13a1,1,0,0,1-1-1V3H9A1,1,0,0,0,8,4V16a1,1,0,0,0,1,1H19a1,1,0,0,0,1-1V4A1,1,0,0,0,19,3Z"/>
     <path id="primary" d="M16,17v3a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V8A1,1,0,0,1,5,7H8" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
@@ -252,6 +252,7 @@ function addShareButtons(anchor, recid, personName, mobileNumber, location, desc
 </svg>`
   copyBtn.title = "העתק ללוח";
   copyBtn.style.cursor = "pointer";
+  copyBtn.style.height = 'fit-content'
   copyBtn.onclick = () => {
     navigator.clipboard.writeText(textToShare)
     .then(() => {
@@ -261,20 +262,6 @@ function addShareButtons(anchor, recid, personName, mobileNumber, location, desc
       showErrorMsg('לא ניתן להעתיק ללוח')
     });
   };
-  // const copyBtn = document.createElement("button");
-  // copyBtn.innerText = "📋";
-  // copyBtn.type = 'button'
-  // copyBtn.title = "העתק ללוח";
-  // copyBtn.style.cssText = "margin-left:5px; cursor:pointer; font-size:12px;";
-  // copyBtn.onclick = () => {
-  //   navigator.clipboard.writeText(textToShare)
-  //   .then(() => {
-  //     showUserMsg(`פניה ${recid} הועתקה ללוח`)
-  //   })
-  //   .catch(() => {
-  //     showErrorMsg('לא ניתן להעתיק ללוח')
-  //   });
-  // };
 
   // WhatsApp share button with image
   const waBtn = document.createElement("a");
@@ -282,7 +269,7 @@ function addShareButtons(anchor, recid, personName, mobileNumber, location, desc
   waBtn.target = "_blank";
   waBtn.rel = "noopener noreferrer";
   waBtn.title = "שתף בוואטסאפ";
-  waBtn.style.cssText = "margin-left:5px; font-size:12px; text-decoration:none; display:inline-block; vertical-align:middle;";
+  waBtn.style.cssText = "font-size:12px; text-decoration:none; display:inline-block; vertical-align:middle;";
 
   const waIcon = document.createElement("img");
   waIcon.src = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"; // You can use a local path instead
@@ -295,6 +282,7 @@ function addShareButtons(anchor, recid, personName, mobileNumber, location, desc
   container.style.display = 'flex'
   container.style.gap = '5px'
   container.style.justifyContent = 'center'
+  container.style.alignItems = 'center'
   container.style.marginBlockStart = '5px'
 
   // Append buttons to the <td>

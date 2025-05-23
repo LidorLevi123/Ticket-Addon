@@ -57,7 +57,7 @@ function addDotListener() {
 }
 
 function addColorListener() {
-    const elTicketList = document.querySelector('form table')
+    const elTicketList = document.querySelector('.main-ticket-list')
     elTicketList.addEventListener('click', ev => {
         if (!gSelectedColor) return
 
@@ -99,7 +99,7 @@ function addUndoListener() {
 
         if (el.dataset.isColored) {
             el.style.backgroundColor = DEFAULT_TICKET_COLOR
-            el.style.boxShadow = `inset 0px 0px 6px 2px ${gSelectedColor}`
+            if(gSelectedColor) el.style.boxShadow = `inset 0px 0px 6px 2px ${gSelectedColor}`
             delete el.dataset.isColored
             gColoredElements = gColoredElements.filter(coloredEl => coloredEl.title !== el.title)
             _saveColoredEls()
