@@ -1,17 +1,14 @@
 # Ticket System Expansion Pack
 
-A Chrome extension that enhances the functionality of the Ariel University ticket system with additional features and improved user experience.
-
-![Extension Logo](img/logo.png)
-*Extension logo and branding*
+A Chrome extension that enhances the Ariel University ticket system by providing instant access to ticket details and streamlined workflow features.
 
 ## Features
 
-- **Location Tracking**: Automatically fetches and displays location information for tickets
-- **Excel Export**: Export ticket data to Excel format for easy analysis and record-keeping
+- **Instant Ticket Details**: Automatically fetches and displays all ticket information directly on the main screen
+- **Smart Clipboard Integration**: One-click copy of ticket details for easy sharing and documentation
+- **Excel Export**: Export ticket data to Excel format for analysis and record-keeping
 - **Multi-language Support**: Built-in translation services for better accessibility
 - **Smart Caching**: Efficient ticket data caching for improved performance
-- **User Messaging**: Enhanced communication features for ticket management
 - **Label Management**: Advanced labeling system for better ticket organization
 
 ## Installation
@@ -25,9 +22,6 @@ git clone [repository-url]
 3. Enable "Developer mode" in the top right corner
 4. Click "Load unpacked" and select the extension directory
 
-![Installation Guide](img/installation.png)
-*Step-by-step installation guide*
-
 ## Usage
 
 The extension automatically activates when you visit the Ariel University ticket system pages:
@@ -36,27 +30,41 @@ The extension automatically activates when you visit the Ariel University ticket
 
 ### Key Features
 
-#### Location Tracking
-- Automatically fetches and displays location information for each ticket
-- Caches location data for improved performance
-- Displays location information in an easy-to-read format
-
-![Location Tracking](img/location-tracking.png)
-*Example of location information display*
+#### Instant Ticket Details
+- Automatically fetches and displays all ticket information on the main screen
+- No need to open individual tickets to view details
+- Shows location, contact information, and ticket status at a glance
+- Caches data for improved performance
 
 **Example Usage:**
 ```javascript
-// The extension automatically processes tickets and displays locations
-// No additional code needed - just visit the ticket page
+// The extension automatically processes all tickets on the page
+// All information is displayed directly in the ticket list
+// No need to click into individual tickets
 ```
+
+#### Clipboard Integration
+- One-click copy of formatted ticket details
+- Includes all relevant information in a clean, readable format
+- Perfect for quick sharing and documentation
+- Supports multiple ticket selection
+
+**Example Usage:**
+1. Navigate to the tickets page
+2. Click the copy icon next to any ticket
+3. Ticket details are automatically copied to clipboard in a formatted structure:
+   ```
+   Ticket ID: [ID]
+   Location: [Location]
+   Contact: [Name] - [Phone]
+   Status: [Status]
+   Description: [Description]
+   ```
 
 #### Excel Export
 - Export ticket data to Excel format
 - Includes all relevant ticket information
 - Customizable export options
-
-![Excel Export](img/excel-export.png)
-*Excel export interface and sample output*
 
 **Example Usage:**
 1. Navigate to the tickets page
@@ -72,9 +80,6 @@ The extension automatically activates when you visit the Ariel University ticket
 - Supports multiple languages
 - Easy language switching
 
-![Language Support](img/language-support.png)
-*Language selection interface*
-
 **Example Usage:**
 1. Click the language icon in the toolbar
 2. Select your preferred language
@@ -84,7 +89,7 @@ The extension automatically activates when you visit the Ariel University ticket
 
 #### Common Issues and Solutions
 
-1. **Location Not Loading**
+1. **Ticket Details Not Loading**
    - Clear browser cache
    - Refresh the page
    - Check internet connection
@@ -99,9 +104,6 @@ The extension automatically activates when you visit the Ariel University ticket
    - Reload the page
    - Check if the language file is properly loaded
 
-![Troubleshooting Guide](img/troubleshooting.png)
-*Common issues and their solutions*
-
 ## Project Structure
 
 ```
@@ -109,7 +111,7 @@ The extension automatically activates when you visit the Ariel University ticket
 ├── js/                    # JavaScript files
 │   ├── services/         # Service modules
 │   ├── lib/             # Library files
-│   ├── location-fetch.js # Location processing
+│   ├── location-fetch.js # Ticket data processing
 │   ├── excel-btn.js     # Excel export functionality
 │   ├── labels.js        # Label management
 │   ├── translate.js     # Translation services
@@ -129,9 +131,6 @@ The extension automatically activates when you visit the Ariel University ticket
 1. Make your changes to the source code
 2. Test the changes in Chrome's extension development mode
 3. Reload the extension to see your changes
-
-![Development Setup](img/development.png)
-*Development environment setup guide*
 
 ## Contributing
 
@@ -153,8 +152,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgments
 
 - Ariel University for providing the base ticket system
-- All contributors who have helped improve this extension
-
----
-
-*Note: All images shown are placeholders. Please replace them with actual screenshots and diagrams of your extension in action.* 
+- All contributors who have helped improve this extension 
